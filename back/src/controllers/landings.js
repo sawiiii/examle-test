@@ -1,29 +1,8 @@
 const axios = require('axios');
+const staff = require('./staff');
+const sales = require('./sales');
+const payments = require('./payments');
 
-function getData(){
-    axios.get('https://storage.googleapis.com/backupdatadev/ejercicio/ventas.json')
-        .then(response => {
-            // console.log(response.data[1].products);
-            // var data = response.data;
-            return response.data;
-        })
-        .catch(error => {
-            console.log(error);
-        });
-};
-
-
-const data = (function() {
-    axios.get('https://storage.googleapis.com/backupdatadev/ejercicio/ventas.json')
-        .then(response => {
-            console.log(response.data[1].products);
-            const data = response.data;
-            return data;
-        })
-        .catch(error => {
-            console.log(error);
-        });
-});
 
 module.exports = {
 
@@ -37,8 +16,33 @@ module.exports = {
         .catch(error => {
             console.log(error);
         });
-        console.log(data);
-        res.status(200).send(data[0].zone);
-    }
+        const currentMonth = new Date('2019-03-20 15:31:42').getMonth();
+        const currentYear = new Date('2019-03-20 15:31:42').getFullYear();
+        const currentDay = new Date('2019-03-20 15:31:42').getDay();
+
+        const currentSales = sales.getCurrentSales(data,currentMonth,currentYear);
+        const salesDaily = sales.getBillsByDay(data,currentMonth,currentYear, currentDay);
+        const monthBills = sales.getBillsForMonth(data,currentMonth,currentYear);
+        const tableAverage = sales.getAverageTableCost(data,currentMonth,currentYear);
+
+        const jsonCards = payments.getBillByCard(data,currentMonth,currentYear);
+
+        const staffMonthly = staff.getStaffNumberMonthly(data,currentMonth,currentYear);
+        const waiters = staff.getNumberOfWaiter(data);
+        const cashiers = staff.getNumberOfCashiers(data);
+        
+        const jsonSend = {
+            currentSales: currentSales,
+            waiters: waiters,
+            cashiers: cashiers,
+            billsNumber: monthBills,
+            tableAverage: tableAverage,
+            counterCards: jsonCards,
+            dailySales: salesDaily,
+            staff: staffMonthly,
+        };
+
+        res.status(200).send(jsonSend);
+    },
   }
   
