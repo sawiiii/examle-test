@@ -186,7 +186,7 @@ if (data) {
                                     return (
                                       <tr key={key}>
                                         <td className="py-2">{data.product}</td>
-                                        <td className="text-gray-500">{data.valor}</td>  
+                                        <td className="text-gray-500">$ {data.valor}</td>  
                                       </tr>
                                     );
                                 })} 
@@ -235,7 +235,7 @@ if (data) {
                                 {data.diners}
                               </td>
                               <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                {data.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+                                $ {data.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
                               </td>
                               <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 {data.date_closed}
