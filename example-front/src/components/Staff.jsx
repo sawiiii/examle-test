@@ -129,7 +129,7 @@ const Staff = () => {
                                         Cashier
                                       </th>
                                       <th scope="col" className="text-sm font-medium text-gray-500 px-2 py-2 text-left">
-                                       Times tables attended
+                                        Collected ballots
                                       </th>
                                       <th scope="col" className="text-sm font-medium text-gray-500 px-2 py-2 text-left">
                                         On Bills
@@ -164,7 +164,7 @@ const Staff = () => {
                                         Waiter
                                       </th>
                                       <th scope="col" className="text-sm font-medium text-gray-500 px-2 py-2 text-left">
-                                        Times tables attended
+                                        Tables attended
                                       </th>
                                       <th scope="col" className="text-sm font-medium text-gray-500 px-2 py-2 text-left">
                                         On Bills
