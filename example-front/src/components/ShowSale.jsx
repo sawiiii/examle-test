@@ -77,7 +77,7 @@ if (data) {
                   return (
                     <tr key={key}>
                       <td className="pl-4            ">{dat.name}</td>
-                      <td className="text-gray-500 text-center">{dat.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</td> 
+                      <td className="text-gray-500 text-center">$ {dat.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</td> 
                       <td className="text-gray-500 text-center">{dat.category}</td> 
                       <td className="text-gray-500 text-center">{dat.quantity}</td>  
                     </tr>

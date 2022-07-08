@@ -122,7 +122,7 @@ if (data && products) {
                 <div className="flex flex-wrap items-center justify-center space-x-2">
                   <div className="w-1/3 py-8 px-6 space-y-6 rounded-xl border border-gray-200 bg-white shadow-md">
                             <div>
-                                <h5 className="text-xl text-gray-600 text-center">Product</h5>
+                                <h5 className="text-xl text-gray-600 text-center">Top selling product</h5>
                                 <div className="mt-2 flex justify-center gap-4">
                                     <h3 className="text-3xl font-bold text-gray-700">{ spinner ? <Spinner /> : data.max.quantity}</h3>
                                 </div>
