@@ -2,6 +2,7 @@ import React from 'react'
 import { CollectionIcon, CreditCardIcon, UserGroupIcon, ChartBarIcon, ShoppingBagIcon, UserIcon, LogoutIcon } from '@heroicons/react/outline';
 import { useNavigate } from "react-router-dom";
 
+// eslint-disable-next-line react/prop-types
 const Sidebar = ({ path }) => {
     const navigate = useNavigate();
   return (
