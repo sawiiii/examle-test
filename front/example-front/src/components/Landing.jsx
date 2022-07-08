@@ -5,7 +5,23 @@ import Spinner from "./spinner/Spinner";
 import Sidebar from "./Sidebar";
 
 const Landing = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState({
+    currentSales: 0,
+    waiters: 0,
+    cashiers: 0,
+    billsNumber: 0,
+    tableAverage: 0,
+    counterCards: {
+      bills: 0,
+      credit: 0, 
+      debit: 0, 
+      cash: 0,
+    },
+    dailySales: 0,
+    staff: 0,
+    products: [],
+    totalProducts:  0,
+  });
 
   const callApi = () => {
     // console.log(`Cookie :${Cookies.get('token')}`);
@@ -37,6 +53,7 @@ const Landing = () => {
           </div>
     {/* conteiners  */}
           <div className="px-6 pt-6 2xl:container">
+              <p className="mb-1 border-2 p-2 rounded-md">Está seteada una fecha por defecto, para que funcione, ya que no existen valores para la fecha actual {"-->"} 2019-03-20 15:31:42</p>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   <div className="md:col-span-2 lg:col-span-1" >
                           {/* card 1 */}
@@ -98,25 +115,31 @@ const Landing = () => {
                   </div>
                   <div>
                     {/* card 3 */}
-                      <div className=" py-8 px-6 rounded-xl border border-gray-200 bg-white shadow-md">
+                      <div className="h-[305px] py-8 px-6 rounded-xl border border-gray-200 bg-white shadow-md overflow-scroll">
                           <h5 className="text-xl text-gray-700">Products</h5>
                           <div className="my-8">
-                              <h1 className="text-5xl font-bold text-gray-800">64,5%</h1>
-                              <span className="text-gray-500">Compared to last week $13,988</span>
+                              <h1 className="text-5xl font-bold text-gray-800">{data.totalProducts}</h1>
+                              <span className="text-gray-500">products</span>
                           </div>
-                          
                           <table className="mt-6 -mb-2 w-full text-gray-600">
+                              <thead className="border-b text-sm">
+                                    <tr>
+                                      <th scope="col" className="text-sm font-medium text-gray-500 px-2 py-2 text-left">
+                                        Product
+                                      </th>
+                                      <th scope="col" className="text-sm font-medium text-gray-500 px-2 py-2 text-left">
+                                        Price
+                                      </th>
+                                    </tr>
+                              </thead>
                               <tbody>
-                                  <tr>
-                                      <td className="py-2">From new users</td>
-                                      <td className="text-gray-500">896</td>
-                                      
+                                {data.products.map((data,key) => {
+                                  return(
+                                  <tr key={key}>
+                                      <td className="py-2 text-sm">{data.product}</td>
+                                      <td className="text-gray-500  text-sm text-right">{data.valor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</td>
                                   </tr>
-                                  <tr>
-                                      <td className="py-2">From old users</td>
-                                      <td className="text-gray-500">1200</td>
-                                        
-                                  </tr>
+                                );})}
                               </tbody>
                           </table>   
                       </div>
@@ -155,56 +178,6 @@ const Landing = () => {
               </div>
           </div>
     </div>
-      {/* <div className="w-full h-screen bg-slate-100 p-10 flex flex-col items-center">
-          <hi className="text-xl p-4 rounded bg-slate-200 shadow-md">La pikada de la esquina</hi>
-        <div className="shadow-md w-4/5 flex flex-col mt-4 p-6 items-start rounded bg-slate-200">
-          <p className="text-xl">Buen dia Antonio</p>
-          <p>Sales</p>
-          <div className="flex flex-row justify-center w-full p-4 space-x-2">
-            <div className="w-auto p-4 bg-slate-300 rounded flex flex-col items-center">
-              <p className="text-xl">$ {data.currentSales}</p>
-              <p className="text-sm">On Sell this month</p>
-              <button className="text-sm rounded bg-sky-300 p-2 hover:bg-sky-400">View other months</button>
-            </div>
-            <div className="w-auto p-4 bg-slate-300 rounded flex flex-col items-center">
-              <p className="text-xl">{data.currentSales}</p>
-              <p className="text-sm">Services on this month</p>
-              <button className="text-sm rounded bg-sky-300 p-2 hover:bg-sky-400">View other months</button>
-            </div>
-          </div>
-          <p>Staff</p>
-          <div className="flex flex-row justify-center w-full p-4 space-x-2">
-            <div className="w-auto p-4 bg-slate-300 rounded flex flex-col items-center">
-              <p className="text-xl">{data.waiters}</p>
-              <p className="text-sm">Waiters</p>
-              <button className="text-sm rounded bg-orange-300 p-2 hover:bg-orange-400">View Waiters</button>
-            </div>
-            <div className="w-auto p-4 bg-slate-300 rounded flex flex-col items-center">
-              <p className="text-xl">{data.cashiers}</p>
-              <p className="text-sm">Cashiers</p>
-              <button className="text-sm rounded bg-orange-300 p-2 hover:bg-orange-400">View Cashiers</button>
-            </div>
-          </div>
-          <p>Products</p>
-          <div className="flex flex-row justify-center w-full p-4 space-x-2">
-            <div className="w-auto p-4 bg-slate-300 rounded flex flex-col items-center">
-              <p className="text-xl">{data.waiters}</p>
-              <p className="text-sm">Waiters</p>
-              <button className="text-sm rounded bg-green-300 p-2 hover:bg-green-400">View Waiters</button>
-            </div>
-            <div className="w-auto p-4 bg-slate-300 rounded flex flex-col items-center">
-              <p className="text-xl">{data.cashiers}</p>
-              <p className="text-sm">Cashiers</p>
-              <button className="text-sm rounded bg-green-300 p-2 hover:bg-green-400">View Cashiers</button>
-            </div>
-            <div className="w-auto p-4 bg-slate-300 rounded flex flex-col items-center">
-              <p className="text-xl">$ {data.currentSales}</p>
-              <p className="text-sm">On Sell this month</p>
-              <button className="text-sm rounded bg-green-300 p-2 hover:bg-green-400">View other months</button>
-            </div>
-          </div>
-        </div>
-      </div> */}
       </>
     )
   } else {

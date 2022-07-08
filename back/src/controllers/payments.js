@@ -69,7 +69,7 @@ function getValues(data){
         days: days,
         months: months,
         years: years,
-        types: types
+        types: types,
     };
     // console.log(jsonSend);
     return jsonSend;
@@ -91,11 +91,18 @@ module.exports = {
         .catch(error => {
             console.log(error);
         });
-        const dates = getValues(data)
+        const dates = getValues(data);
+        const info = filter.getBillsAndPorcentages(data);
         
         jsonSend = {
             dates: dates,
-            data: []
+            data: data,
+            porDeb: info.counterDeb,
+            porCred: info.counterCred,
+            porCash: info.counterCash,
+            numberBills: info.counter,
+            profitTypes: info.earn,
+            total: info.total,
         }
         res.status(200).send(jsonSend);
     },
@@ -110,10 +117,22 @@ module.exports = {
         .catch(error => {
             console.log(error);
         });
-        const dates = filter.filterPayments(data, params)
-        console.log(dates);
+        const dates = getValues(data);
+        const datas = filter.filterPayments(data, params);
+        const info = filter.getBillsAndPorcentages(datas);
+        // console.log(dates);
        
-        res.status(200).send(dates);
+        jsonSend = {
+            dates: dates,
+            data: datas,
+            porDeb: info.counterDeb,
+            porCred: info.counterCred,
+            porCash: info.counterCash,
+            numberBills: info.counter,
+            profitTypes: info.earn,
+            total: info.total,
+        }
+        res.status(200).send(jsonSend);
     },
 
 

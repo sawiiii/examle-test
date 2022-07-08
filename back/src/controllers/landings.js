@@ -2,6 +2,7 @@ const axios = require('axios');
 const staff = require('./staff');
 const sales = require('./sales');
 const payments = require('./payments');
+const products = require('./products');
 
 
 module.exports = {
@@ -25,6 +26,8 @@ module.exports = {
         const monthBills = sales.getBillsForMonth(data,currentMonth,currentYear);
         const tableAverage = sales.getAverageTableCost(data,currentMonth,currentYear);
 
+        const product = products.getFoodWithPrice(data);
+
         const jsonCards = payments.getBillByCard(data,currentMonth,currentYear);
 
         const staffMonthly = staff.getStaffNumberMonthly(data,currentMonth,currentYear);
@@ -40,6 +43,8 @@ module.exports = {
             counterCards: jsonCards,
             dailySales: salesDaily,
             staff: staffMonthly,
+            products: product.data,
+            totalProducts:  product.total,
         };
 
         res.status(200).send(jsonSend);

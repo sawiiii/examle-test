@@ -117,11 +117,16 @@ module.exports = {
         .catch(error => {
             console.log(error);
         });
-        const dates = getDateValues(data)
-        
+        const dates = getDateValues(data);
+        const totalProfit = filter.getFullProfit(data);
+        const profitByProduct  = filter.getProfitByProduct(data);
         jsonSend = {
             dates: dates,
-            data: []
+            data: data,
+            totalSales: totalProfit.total,
+            AverageByTable: totalProfit.average,
+            AverageDinersByTable: totalProfit.diners,
+            earnByProducts: profitByProduct,
         }
         res.status(200).send(jsonSend);
     },
@@ -138,10 +143,19 @@ module.exports = {
         .catch(error => {
             console.log(error);
         });
-        const dates = filter.filterSales(data, params)
-        // console.log(dates);
-       
-        res.status(200).send(dates);
+        const dates = getDateValues(data)
+        const datas = filter.filterSales(data, params)
+        const totalProfit = filter.getFullProfit(datas);
+        const profitByProduct  = filter.getProfitByProduct(datas);
+        jsonSend = {
+            dates: dates,
+            data: datas,
+            totalSales: totalProfit.total,
+            AverageByTable: totalProfit.average,
+            AverageDinersByTable: totalProfit.diners,
+            earnByProducts: profitByProduct,
+        }
+        res.status(200).send(jsonSend);
     },
 
     async showSale(req, res) {
