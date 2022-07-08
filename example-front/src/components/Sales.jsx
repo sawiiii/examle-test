@@ -19,6 +19,7 @@ const Sales = () => {
     earnByProducts: [],
   });
   const [sales, setsales] = useState([]);
+  const [spinner, setspinner] = useState(true);
   const [spin, setspin] = useState(false);
   const [fields, setFields] = useState({
     day: '',
@@ -34,6 +35,7 @@ const Sales = () => {
         const Data = response.data;
         setData(Data);
         setsales(Data.data);
+        setspinner(false);
       })
       .catch((error) => {
         console.log(error);
@@ -63,13 +65,14 @@ const Sales = () => {
   };
 
   useEffect(() => {
+    setspinner(true);
     callApi();
   }, []);
 
 if (data) {
   return (
     <>
-    <Sidebar />
+    <Sidebar path={'/sales'}/>
     <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
           <div className="sticky z-10 top-0 h-16 border-b border-neutral-200 bg-white lg:py-2.5">
               <div className="px-6 flex items-center justify-between space-x-4 2xl:container">
@@ -146,7 +149,6 @@ if (data) {
                 />
               </svg> 
                 : <></>}
-                {/* <button className='bg-sky-600 rounded-lg text-lg px-4 py-2 hover:bg-transparent hover:text-black hover:bg-slate-300 border-sky-600'>Search</button> */}
               </form>
             </div>
             <div className="border-2 my-2 p-2 text-sm rounded-md shadow-sm">
@@ -156,7 +158,7 @@ if (data) {
                             <div>
                                 <h5 className="text-xl text-gray-600 text-center">Sales</h5>
                                 <div className="mt-2 flex justify-center gap-4">
-                                    <h3 className="text-3xl font-bold text-gray-700">{data.totalSales}</h3>
+                                    <h3 className="text-3xl font-bold text-gray-700">{ spinner ? <Spinner /> : data.totalSales }</h3>
                                 </div>
                                 <span className="block text-center text-gray-500">sold on this dates</span>
                             </div>
@@ -170,14 +172,6 @@ if (data) {
                                         <td className="py-2">Average diners for table</td>
                                         <td className="text-gray-500">{data.AverageDinersByTable}</td>
                                     </tr>
-                                    {/* <tr>
-                                        <td className="py-2">Monthly Bills</td>
-                                        <td className="text-gray-500">dff</td>
-                                    </tr> 
-                                    <tr>
-                                        <td className="py-2">Average cost for table</td>
-                                        <td className="text-gray-500">$sdfs</td>
-                                    </tr> */}
                                 </tbody>
                             </table> 
                   </div>
@@ -188,14 +182,15 @@ if (data) {
                             </div>
                             <table className="w-full text-gray-600">
                                 <tbody>
-                                {data.earnByProducts.map((data, key) => {
+                                { spinner ? <Spinner /> : data.earnByProducts.map((data, key) => {
                                     return (
                                       <tr key={key}>
                                         <td className="py-2">{data.product}</td>
                                         <td className="text-gray-500">{data.valor}</td>  
                                       </tr>
                                     );
-                                })}
+                                })} 
+                                
                                 
                                 </tbody>
                             </table> 
@@ -257,8 +252,7 @@ if (data) {
                               </td>
                             </tr>
                           );
-                        })}
-                        
+                        })} 
                         </tbody>
                     </table>
                   </div>
@@ -274,7 +268,7 @@ if (data) {
 } else {
   return (
     <>
-    <Sidebar />
+    <Sidebar path={'/sales'} />
     <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
           <div className="sticky z-10 top-0 h-16 border-b border-neutral-200 bg-white lg:py-2.5">
               <div className="px-6 flex items-center justify-between space-x-4 2xl:container">

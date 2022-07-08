@@ -6,6 +6,7 @@ import Spinner from "./spinner/Spinner";
 import { useNavigate } from "react-router-dom";
 
 const Cards = () => {
+  const [spinner, setspinner] = useState(false);
   const [data, setData] = useState({
     dates: {
     days: [],
@@ -38,6 +39,7 @@ const Cards = () => {
         const Data = response.data;
         setData(Data);
         setsales(Data.data);
+        setspinner(false);
       })
       .catch((error) => {
         console.log(error);
@@ -67,13 +69,14 @@ const Cards = () => {
   };
 
   useEffect(() => {
+    setspinner(true);
     callApi();
   }, []);
 
 if (data) {
   return (
     <>
-    <Sidebar />
+    <Sidebar path={'/payments'} />
     <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
           <div className="sticky z-10 top-0 h-16 border-b border-neutral-200 bg-white lg:py-2.5">
               <div className="px-6 flex items-center justify-between space-x-4 2xl:container">
@@ -173,7 +176,7 @@ if (data) {
                             <div>
                                 <h5 className="text-xl text-gray-600 text-center">Payments</h5>
                                 <div className="mt-2 flex justify-center gap-4">
-                                    <h3 className="text-3xl font-bold text-gray-700">{data.numberBills}</h3>
+                                    <h3 className="text-3xl font-bold text-gray-700">{ spinner ? <Spinner /> : data.numberBills }</h3>
                                 </div>
                                 <span className="block text-center text-gray-500">bills payed between</span>
                             </div>
@@ -194,11 +197,11 @@ if (data) {
                                 </tbody>
                             </table> 
                   </div>
-                  <div className="w-1/3  py-8 px-6 space-y-6 rounded-xl border border-gray-200 bg-white shadow-md overflow-scroll">
+                  <div className="w-1/3 h-[290px] py-8 px-6 space-y-6 rounded-xl border border-gray-200 bg-white shadow-md overflow-scroll">
                             <div>
                                 <h5 className="text-xl text-gray-600 text-center">Earn in total</h5>
                                 <div className="mt-2 flex justify-center gap-4">
-                                    <h3 className="text-3xl font-bold text-gray-700">$ {data.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</h3>
+                                    <h3 className="text-3xl font-bold text-gray-700">$ { spinner ? <Spinner /> : data.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</h3>
                                 </div>
                                 <span className="block text-center text-gray-500 text-sm">By this three payment methods</span>
                             </div>
@@ -292,7 +295,7 @@ if (data) {
 } else {
   return (
     <>
-    <Sidebar />
+    <Sidebar path={'/payments'} />
     <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
           <div className="sticky z-10 top-0 h-16 border-b border-neutral-200 bg-white lg:py-2.5">
               <div className="px-6 flex items-center justify-between space-x-4 2xl:container">

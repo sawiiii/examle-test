@@ -5,6 +5,7 @@ import Spinner from "./spinner/Spinner";
 import Sidebar from "./Sidebar";
 
 const Landing = () => {
+  const [spinner, setspinner] = useState(false);
   const [data, setData] = useState({
     currentSales: 0,
     waiters: 0,
@@ -29,6 +30,7 @@ const Landing = () => {
       .then((response) => {
         const Data = response.data;
         setData(Data);
+        setspinner(false);
       })
       .catch((error) => {
         console.log(error);
@@ -37,6 +39,7 @@ const Landing = () => {
   };
 
   useEffect(() => {
+    setspinner(true);
     callApi();
   }, []);
 
@@ -44,7 +47,7 @@ const Landing = () => {
     return (
       <>
       {/*  component  */}
-      <Sidebar />
+      <Sidebar path={'/dashboard'} />
       <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
           <div className="sticky z-10 top-0 h-16 border-b border-neutral-200 bg-white lg:py-2.5">
               <div className="px-6 flex items-center justify-between space-x-4 2xl:container">
@@ -61,7 +64,7 @@ const Landing = () => {
                           <div>
                               <h5 className="text-xl text-gray-600 text-center">Sales</h5>
                               <div className="mt-2 flex justify-center gap-4">
-                                  <h3 className="text-3xl font-bold text-gray-700">${data.currentSales.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</h3>
+                                  <h3 className="text-3xl font-bold text-gray-700">${ spinner ? <Spinner /> : data.currentSales.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') }</h3>
                               </div>
                               <span className="block text-center text-gray-500">made on this month</span>
                           </div>
@@ -90,7 +93,7 @@ const Landing = () => {
                           <div>
                               <h5 className="text-xl text-gray-600 text-center">Payments</h5>
                               <div className="mt-2 flex justify-center gap-4">
-                                  <h3 className="text-3xl font-bold text-gray-700">{data.counterCards.bills.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</h3>
+                                  <h3 className="text-3xl font-bold text-gray-700">{ spinner ? <Spinner /> : data.counterCards.bills.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') }</h3>
                               </div>
                               <span className="block text-center text-gray-500">made on this month</span>
                           </div>
@@ -118,7 +121,7 @@ const Landing = () => {
                       <div className="h-[305px] py-8 px-6 rounded-xl border border-gray-200 bg-white shadow-md overflow-scroll">
                           <h5 className="text-xl text-gray-700">Products</h5>
                           <div className="my-8">
-                              <h1 className="text-5xl font-bold text-gray-800">{data.totalProducts}</h1>
+                              <h1 className="text-5xl font-bold text-gray-800">{ spinner ? <Spinner /> : data.totalProducts }</h1>
                               <span className="text-gray-500">products</span>
                           </div>
                           <table className="mt-6 -mb-2 w-full text-gray-600">
@@ -151,7 +154,7 @@ const Landing = () => {
                           <div>
                               <h5 className="text-xl text-gray-600 text-center">Staff</h5>
                               <div className="mt-2 flex justify-center gap-4">
-                                  <h3 className="text-3xl font-bold text-gray-700">{data.staff}</h3>
+                                  <h3 className="text-3xl font-bold text-gray-700">{ spinner ? <Spinner /> : data.staff}</h3>
                               </div>
                               <span className="block text-center text-gray-500">beetwen cashiers and waiters</span>
                           </div>
@@ -183,7 +186,7 @@ const Landing = () => {
   } else {
     return (
       <>
-          <Sidebar /> 
+          <Sidebar path={'/dashboard'} /> 
           <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
             <div className="sticky z-10 top-0 h-16 border-b border-neutral-200 bg-white lg:py-2.5">
                 <div className="px-6 flex items-center justify-between space-x-4 2xl:container">

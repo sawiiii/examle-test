@@ -5,6 +5,7 @@ import Sidebar from './Sidebar'
 import Spinner from "./spinner/Spinner";
 
 const Products = () => {
+  const [spinner, setspinners] = useState(false);
   const [data, setData] = useState({
     products: [],
     data: [],
@@ -28,6 +29,7 @@ const Products = () => {
         setData(Data);
         setProducts(Data.data);
         setDataBack(Data.data);
+        setspinners(false);
         // setProducts(Data.data);
       })
       .catch((error) => {
@@ -62,13 +64,14 @@ const Products = () => {
   };
 
   useEffect(() => {
+    setspinners(true);
     callApi();
   }, []);
 
 if (data && products) {
   return (
     <>
-    <Sidebar />
+    <Sidebar path={'/products'} />
     <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
           <div className="sticky z-10 top-0 h-16 border-b border-neutral-200 bg-white lg:py-2.5">
               <div className="px-6 flex items-center justify-between space-x-4 2xl:container">
@@ -117,17 +120,16 @@ if (data && products) {
                 />
               </svg> 
                 : <></>}
-                {/* <button className='bg-sky-600 rounded-lg text-lg px-4 py-2 hover:bg-transparent hover:text-black hover:bg-slate-300 border-sky-600'>Search</button> */}
               </form>
             </div>
             <div className="border-2 my-2 p-2 text-sm rounded-md shadow-sm">
-                <p className="p-2">Information</p>
+                <p className="p-2">Information -- Summary of all the time</p>
                 <div className="flex flex-wrap items-center justify-center space-x-2">
                   <div className="w-1/3 py-8 px-6 space-y-6 rounded-xl border border-gray-200 bg-white shadow-md">
                             <div>
                                 <h5 className="text-xl text-gray-600 text-center">Product</h5>
                                 <div className="mt-2 flex justify-center gap-4">
-                                    <h3 className="text-3xl font-bold text-gray-700">{data.max.quantity}</h3>
+                                    <h3 className="text-3xl font-bold text-gray-700">{ spinner ? <Spinner /> : data.max.quantity}</h3>
                                 </div>
                                 <span className="block text-center text-gray-500">times sold</span>
                             </div>
@@ -151,11 +153,12 @@ if (data && products) {
                   </div>
                   <div className="w-1/3 h-[254px] py-8 px-6 space-y-6 rounded-xl border border-gray-200 bg-white shadow-md overflow-scroll">
                             <div>
-                                <h5 className="text-xl text-gray-600 text-center">Amount sold by product</h5>
+                                <h5 className="text-xl text-gray-600 text-center">Quantity sold per product</h5>
                             </div>
                             <table className="w-full text-gray-600">
                                 <tbody>
-                                {data.foodCounter.map((data, key) => {
+                                { spinner ? <Spinner /> : 
+                                data.foodCounter.map((data, key) => {
                                     return (
                                       <tr key={key}>
                                         <td className="py-2">{data.product}</td>
@@ -203,16 +206,6 @@ if (data && products) {
                               <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                 {data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
                               </td>
-                              {/* <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              <button
-                                  onClick={() => {
-                                    navigate(`/sales/${data.id}`);
-                                  }}
-                                  className="inline-block ml-2 px-6 py-2 text-sm text-black font-medium leading-tight  rounded shadow-md hover:bg-yellow-600 hover:text-white hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-700 active:shadow-lg transition duration-150 ease-in-out"
-                                >View
-                              </button>
-                  
-                              </td> */}
                             </tr>
                           );
                         })}
@@ -232,7 +225,7 @@ if (data && products) {
 } else {
   return (
     <>
-    <Sidebar />
+    <Sidebar path={'/products'} />
     <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
           <div className="sticky z-10 top-0 h-16 border-b border-neutral-200 bg-white lg:py-2.5">
               <div className="px-6 flex items-center justify-between space-x-4 2xl:container">
