@@ -122,7 +122,7 @@ const Landing = () => {
                           <h5 className="text-xl text-gray-700">Products</h5>
                           <div className="my-8">
                               <h1 className="text-5xl font-bold text-gray-800">{ spinner ? <Spinner /> : data.totalProducts }</h1>
-                              <span className="text-gray-500">products</span>
+                              <span className="text-gray-500">products - scroll down to see more</span>
                           </div>
                           <table className="mt-6 -mb-2 w-full text-gray-600">
                               <thead className="border-b text-sm">

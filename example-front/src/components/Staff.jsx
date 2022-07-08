@@ -120,7 +120,7 @@ const Staff = () => {
                 </form>
               </div>
               <div className="border-2 my-2 p-2 text-sm rounded-md shadow-sm">
-                  <p className="p-2">Information</p>
+                  <p className="p-2">Information -- Summary of all the time</p>
                   <div className="flex flex-wrap items-center justify-center">
                   <div className="w-1/2 h-[254px] py-8 px-6 space-y-6 rounded-xl border border-gray-200 bg-white shadow-md overflow-scroll">
                     <div>

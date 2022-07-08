@@ -177,7 +177,7 @@ if (data) {
                   </div>
                   <div className="w-1/3 h-[254px] py-8 px-6 space-y-6 rounded-xl border border-gray-200 bg-white shadow-md overflow-scroll">
                             <div>
-                                <h5 className="text-xl text-gray-600 text-center">Earn by product</h5>
+                                <h5 className="text-xl text-gray-700 text-center">Earn by product</h5>
                                 <span className="block text-center text-gray-500 text-sm">Scroll down to see more</span>
                             </div>
                             <table className="w-full text-gray-600">
