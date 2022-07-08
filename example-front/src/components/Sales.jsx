@@ -158,7 +158,7 @@ if (data) {
                             <div>
                                 <h5 className="text-xl text-gray-600 text-center">Sales</h5>
                                 <div className="mt-2 flex justify-center gap-4">
-                                    <h3 className="text-3xl font-bold text-gray-700">{ spinner ? <Spinner /> : data.totalSales }</h3>
+                                    <h3 className="text-3xl font-bold text-gray-700">{ spinner ? <Spinner /> : <>$ {data.totalSales}</> }</h3>
                                 </div>
                                 <span className="block text-center text-gray-500">sold on this dates</span>
                             </div>
