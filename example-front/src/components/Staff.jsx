@@ -15,16 +15,13 @@ const Staff = () => {
     waiter: '',
   });
   const callApi = () => {
-    // console.log(`Cookie :${Cookies.get('token')}`);
     Axios.get(makeEndPoint("staff"))
       .then((response) => {
         const Data = response.data;
         setData(Data);
-        // setsales(Data.data);
       })
       .catch((error) => {
         console.log(error);
-        // navigate.goBack();
       });
   };
 
@@ -42,7 +39,6 @@ const Staff = () => {
       })
       .catch((error) => {
         console.log(error);
-        // navigate.goBack();
       });
   };
 
@@ -116,7 +112,6 @@ const Staff = () => {
                   />
                 </svg> 
                   : <></>}
-                  {/* <button className='bg-sky-600 rounded-lg text-lg px-4 py-2 hover:bg-transparent hover:text-black hover:bg-slate-300 border-sky-600'>Search</button> */}
                 </form>
               </div>
               <div className="border-2 my-2 p-2 text-sm rounded-md shadow-sm">
@@ -178,7 +173,6 @@ const Staff = () => {
                                     </tr>
                                   </thead>
                                   <tbody>
-                                  {/* bills: 33682083, counter: 574 } */}
                                   {data.waiters.map((data, key) => {
                                       return (
                                         <tr key={key}>

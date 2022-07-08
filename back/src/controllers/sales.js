@@ -6,18 +6,14 @@ function getCurrentSales(data,currentMonth,currentYear){
     var sellCurrentMonth = data.filter(function (sell) {
         const month = new Date(sell.date_closed).getMonth();
         const year = new Date(sell.date_closed).getFullYear();
-        // console.log(year, month);
         if (month == currentMonth && currentYear == year) {
-            // console.log(sell.date_closed);
             return sell; 
         }
     });
-    // console.log(sellCurrentMonth.length);
     var currentSales = 0;
     sellCurrentMonth.forEach(function(value, index){
         currentSales += value.total;
     });
-    // console.log(currentSales);
     return currentSales;
 };
 
@@ -26,7 +22,6 @@ function getBillsForMonth(data, currentMonth, currentYear){
     var sellCurrentMonth = data.filter(function (sell) {
         const month = new Date(sell.date_closed).getMonth();
         const year = new Date(sell.date_closed).getFullYear();
-        // console.log(year, month);
         if (month == currentMonth && currentYear == year) {
             return sell; 
         }
@@ -40,7 +35,6 @@ function getBillsByDay(data, currentMonth, currentYear, currentDay){
         const month = new Date(sell.date_closed).getMonth();
         const year = new Date(sell.date_closed).getFullYear();
         const day = new Date(sell.date_closed).getDay();
-        // console.log(year, month);
         if (month == currentMonth && currentYear == year && day == currentDay) {
             return sell; 
         }
@@ -59,7 +53,6 @@ function getAverageTableCost(data, currentMonth, currentYear){
     var sellCurrentMonth = data.filter(function (sell) {
         const month = new Date(sell.date_closed).getMonth();
         const year = new Date(sell.date_closed).getFullYear();
-        // console.log(year, month);
         if (month == currentMonth && currentYear == year) {
             return sell; 
         }
@@ -80,7 +73,6 @@ function getDateValues(data){
         const month = new Date(sell.date_closed).getMonth();
         const year = new Date(sell.date_closed).getFullYear();
         const day = new Date(sell.date_closed).getDate();
-        // console.log(year, month, day , sell.date_closed);
         if (days.indexOf(day) == -1) {  
             days.push(day); 
         };
@@ -111,7 +103,6 @@ module.exports = {
         var data = '';
         await axios.get('https://storage.googleapis.com/backupdatadev/ejercicio/ventas.json')
         .then(response => {
-            // console.log(response.data[1].products);
             data = response.data;
         })
         .catch(error => {
@@ -132,12 +123,10 @@ module.exports = {
     },
 
     async filters(req, res) {
-        // console.log(req.query);
         const params = req.query;
         var data = '';
         await axios.get('https://storage.googleapis.com/backupdatadev/ejercicio/ventas.json')
         .then(response => {
-            // console.log(response.data[1].products);
             data = response.data;
         })
         .catch(error => {
@@ -159,19 +148,16 @@ module.exports = {
     },
 
     async showSale(req, res) {
-        // console.log(req.params);
         const { id } = req.params;
         var data = '';
         await axios.get('https://storage.googleapis.com/backupdatadev/ejercicio/ventas.json')
         .then(response => {
-            // console.log(response.data[1].products);
             data = response.data;
         })
         .catch(error => {
             console.log(error);
         });
         const show = data.find( sale => sale.id === id);
-        // console.log(show);
         res.status(200).send(show);
     },
   }

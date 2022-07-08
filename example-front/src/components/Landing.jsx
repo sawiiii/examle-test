@@ -25,7 +25,6 @@ const Landing = () => {
   });
 
   const callApi = () => {
-    // console.log(`Cookie :${Cookies.get('token')}`);
     Axios.get(makeEndPoint(""))
       .then((response) => {
         const Data = response.data;
@@ -34,7 +33,6 @@ const Landing = () => {
       })
       .catch((error) => {
         console.log(error);
-        // navigate.goBack();
       });
   };
 
@@ -169,11 +167,6 @@ const Landing = () => {
                                       <td className="py-2">Waiters</td>
                                       <td className="text-gray-500">{data.waiters}</td>
                                   </tr>
-                                  {/* <tr>
-                                      <td className="py-2">Other</td>
-                                      <td className="text-gray-500">12</td>
-                                      
-                                  </tr> */}
                               </tbody>
                           </table> 
                         </div>

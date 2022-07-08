@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 function filterSales(data, params){
-    // { day: '3', month: '2', year: '2019' }
     var query = data;
     if (params.month == '' && params.day == '' && params.year == ''){
         return data;
@@ -166,12 +165,6 @@ function getProfitByProduct(data){
         let clave = claves[i];
         arrayCounter.push({product: clave, valor: categoriesCounter[clave].toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')});
     };
-    // console.log(arrayCounter);
-    // const send = {
-    //     total: total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-    //     average: average.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-    //     diners: dinerAverage.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-    // };
     return arrayCounter;
 };
 
@@ -283,7 +276,6 @@ function getInfoCashierWaiter(data){
         let clave = key[i];
         arrayWaiters.push({person: clave, bills: waiter[clave][0], counter: waiter[clave][1]});
     };
-    // console.log(arrayWaiters);
     const json = {
         cashiers: arrayCashiers,
         waiters: arrayWaiters,

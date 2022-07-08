@@ -22,7 +22,6 @@ const Products = () => {
     category: '',
   });
   const callApi = () => {
-    // console.log(`Cookie :${Cookies.get('token')}`);
     Axios.get(makeEndPoint("products"))
       .then((response) => {
         const Data = response.data;
@@ -30,18 +29,15 @@ const Products = () => {
         setProducts(Data.data);
         setDataBack(Data.data);
         setspinners(false);
-        // setProducts(Data.data);
       })
       .catch((error) => {
         console.log(error);
-        // navigate.goBack();
       });
   };
 
   const handleFilter = (e) => {
     e.preventDefault();
     setspin(true);
-    // console.log(`Cookie :${Cookies.get('token')}`);
     const config2 = {
       params: { category: fields.category },
     };
@@ -59,7 +55,6 @@ const Products = () => {
       })
       .catch((error) => {
         console.log(error);
-        // navigate.goBack();
       });
   };
 
@@ -171,7 +166,6 @@ if (data && products) {
                             </table> 
                   </div>
                 </div>
-                
             </div>
             <div className="border-2 my-2 p-2 text-sm rounded-md">
               Products - Select filters to search products by categories

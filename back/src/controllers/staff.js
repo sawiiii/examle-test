@@ -5,7 +5,6 @@ const filter = require('./filters');
 function getNumberOfWaiter(data){
     var waiters = [];
     data.forEach(function(sell) {
-        // console.log(waiters.indexOf(sell.waiter));
         if (waiters.indexOf(sell.waiter) == -1) {  
             waiters.push(sell.waiter); 
         }
@@ -66,7 +65,6 @@ module.exports = {
         var data = '';
         await axios.get('https://storage.googleapis.com/backupdatadev/ejercicio/ventas.json')
         .then(response => {
-            // console.log(response.data[1].products);
             data = response.data;
         })
         .catch(error => {
@@ -84,12 +82,10 @@ module.exports = {
         res.status(200).send(jsonSend);
     },
     async filters(req, res) {
-        // console.log(req.query);
         const params = req.query;
         var data = '';
         await axios.get('https://storage.googleapis.com/backupdatadev/ejercicio/ventas.json')
         .then(response => {
-            // console.log(response.data[1].products);
             data = response.data;
         })
         .catch(error => {

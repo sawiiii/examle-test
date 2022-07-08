@@ -11,7 +11,6 @@ module.exports = {
         var data = '';
         await axios.get('https://storage.googleapis.com/backupdatadev/ejercicio/ventas.json')
         .then(response => {
-            // console.log(response.data[1].products);
             data = response.data;
         })
         .catch(error => {

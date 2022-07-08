@@ -220,10 +220,8 @@ if (data) {
                             </table> 
                   </div>
                 </div>
-                
                 <span className="block text-center mt-1 text-gray-500">Due to tables wich divide their total on different bills, when you filter, on the summary box you still be able to see other payment methods </span>
             </div>
-            
             <div className="border-2 my-2 p-2 text-sm rounded-md">
               Payments - Select filters to search by payment type or date
             <div className="flex flex-col">
@@ -279,7 +277,6 @@ if (data) {
                             </tr>
                           );
                         })}
-                        
                         </tbody>
                     </table>
                   </div>

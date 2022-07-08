@@ -9,7 +9,6 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { ChevronLeftIcon } from '@heroicons/react/outline';
 
-
 const ShowSale = () => {
   const { id } = useParams();
   const [data, setData] = useState();
@@ -25,7 +24,6 @@ const ShowSale = () => {
         console.log(error);
       });
   };
-
   useEffect(() => {
     callApi();
   }, []);
@@ -83,13 +81,6 @@ if (data) {
                       <td className="text-gray-500 text-center">{dat.category}</td> 
                       <td className="text-gray-500 text-center">{dat.quantity}</td>  
                     </tr>
-                    // <div key={key} className='border-2 p-2 text-black rounded-md min-w-[150px]'>
-                    //   <p>Category: {dat.category}</p>
-                    //   <p>Price: {dat.price}</p>
-                    //   <p>Name: {dat.name}</p>
-                    //   <p>Quantity: {dat.quantity}</p>
-                    // </div>
-                  
                 );})}
                 </tbody>
                 </table>

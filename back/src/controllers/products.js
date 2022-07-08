@@ -54,7 +54,6 @@ function getFoodCounters(data) {
         };
     };
     const  jsonSend ={
-        // max : maxx,
         data: arrayCounter,
         maax: setMax,
     };
@@ -83,7 +82,6 @@ function getFoodCountersOnFilter(data) {
         };
     };
     const  jsonSend ={
-        // max : maxx,
         data: arrayCounter,
         maax: setMax,
     };
@@ -107,7 +105,6 @@ function getFoodWithPrice(data) {
         arrayCounter.push({product: clave, valor: categoriesCounter[clave]});
     };
     const  jsonSend ={
-        // max : maxx,
         data: arrayCounter,
         total: counters,
     };
@@ -154,16 +151,13 @@ module.exports = {
         const products = getFilterProduct(data);
         const datas = getAllProducts(data);
         const foodCounter = getFoodCounters(data); 
-        // const categoriesCounter = getCategoriesCounters(products);
         
         jsonSend = {
             products: products,
             foodCounter: foodCounter.data,
             max: foodCounter.maax,
-            // categoriesCounter: categoriesCounter,
             data: datas,
         }
-        console.log(jsonSend);
         res.status(200).send(jsonSend);
     },
 
@@ -185,11 +179,8 @@ module.exports = {
             products: types,
             foodCounter: foodCounter.data,
             max: foodCounter.maax,
-            // categoriesCounter: categoriesCounter,
             data: products,
         }
-        
-        console.log(jsonSend);
         res.status(200).send(jsonSend);
     },
   }
