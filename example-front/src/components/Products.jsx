@@ -199,7 +199,7 @@ if (data && products) {
                                 {data.category}
                               </td>
                               <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                {data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+                                $ {data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
                               </td>
                             </tr>
                           );
